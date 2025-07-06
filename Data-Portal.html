@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Census Data Portal | Alt-30 Consulting</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Enhanced color palette */
+        --primary: #0085a2; /* Vibrant teal-blue */
+        --primary-dark: #006d86; /* Darker shade for depth */
+        --secondary: #00b7a8; /* Lighter teal-green */
+        --secondary-light: #7fe0d6; /* Ultra light teal for accents */
+        --accent: #ffe194; /* Soft golden accent */
+        --accent-light: #fff1cc; /* Lighter accent for subtle highlights */
+        --text: #2f2f2f;
+        --text-light: #6f6f6f;
+        --bg: #ffffff;
+        --bg-alt: #f8fbfd;
+        --success: #4caf50;
+        --warning: #ff9800;
+        --error: #f44336;
+        --fade-duration: 0.6s;
+        --fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        height: 100%;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* Typography */
+      h1, h2, h3, h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      /* Utility Classes */
+      .text-gradient {
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .flex-col {
+        flex-direction: column;
+      }
+
+      .items-center {
+        align-items: center;
+      }
+
+      .justify-between {
+        justify-content: space-between;
+      }
+
+      .flex-wrap {
+        flex-wrap: wrap;
+      }
+
+      .gap-1 {
+        gap: 0.5rem;
+      }
+
+      .gap-2 {
+        gap: 1rem;
+      }
+
+      .gap-4 {
+        gap: 2rem;
+      }
+
+      .mt-1 {
+        margin-top: 0.5rem;
+      }
+
+      .mt-2 {
+        margin-top: 1rem;
+      }
+
+      .mt-4 {
+        margin-top: 2rem;
+      }
+
+      .mb-1 {
+        margin-bottom: 0.5rem;
+      }
+
+      .mb-2 {
+        margin-bottom: 1rem;
+      }
+
+      .mb-4 {
+        margin-bottom: 2rem;
+      }
+
+      .p-2 {
+        padding: 1rem;
+      }
+
+      .p-4 {
+        padding: 2rem;
+      }
+
+      .py-1 {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .py-2 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+
+      .px-2 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .px-4 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .w-full {
+        width: 100%;
+      }
+
+      .shadow-sm {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      }
+
+      .shadow {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .shadow-lg {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .rounded {
+        border-radius: 8px;
+      }
+
+      .rounded-lg {
+        border-radius: 12px;
+      }
+
+      .rounded-full {
+        border-radius: 9999px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .backdrop-blur {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(0, 133, 162, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(0, 133, 162, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 133, 162, 0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      .animate-slideUp {
+        animation: slideUp 0.8s var(--fade-ease) forwards;
+        opacity: 0;
+      }
+
+      .animate-pulse {
+        animation: pulse 2s infinite;
+      }
+
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+
+      /* Header / Navigation */
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      nav.container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+      }
+      
+      nav h1 {
+        font-size: 1.5rem;
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+      }
+      
+      nav h1 span {
+        color: var(--accent);
+      }
+      
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.5rem;
+      }
+      
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        font-weight: 500;
+        transition: transform 0.2s, color 0.2s;
+      }
+      
+      nav a:hover,
+      nav a:focus {
+        transform: scale(1.05);
+        color: var(--accent);
+      }
+      
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: 0.3s;
+      }
+      
+      nav a:hover::after,
+      nav a:focus::after {
+        width: 100%;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.5rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 133, 162, 0.15);
+      }
+
+      .btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 133, 162, 0.25);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-secondary {
+        background: var(--secondary);
+        box-shadow: 0 4px 12px rgba(0, 183, 168, 0.15);
+      }
+
+      .btn-secondary:hover {
+        background: #009e92;
+        box-shadow: 0 6px 16px rgba(0, 183, 168, 0.25);
+      }
+
+      .btn-sm {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .btn-accent {
+        background: var(--accent);
+        color: var(--primary-dark);
+        box-shadow: 0 4px 12px rgba(255, 225, 148, 0.3);
+      }
+
+      .btn-accent:hover {
+        background: #ffd761;
+        box-shadow: 0 6px 16px rgba(255, 225, 148, 0.4);
+      }
+
+      /* Mobile Navigation */
+      .mobile-toggle {
+        display: none;
+        font-size: 1.5rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      @media (max-width: 850px) {
+        nav ul {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          height: calc(100vh - 70px);
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          padding-top: 2rem;
+          transition: 0.3s ease-in-out;
+          z-index: 998;
+        }
+        
+        nav ul.active {
+          left: 0;
+        }
+        
+        nav ul li {
+          margin: 1rem 0;
+        }
+        
+        .mobile-toggle {
+          display: block;
+        }
+      }
+
+      /* Main Content Area */
+      .main-content {
+        flex: 1;
+        margin-top: 70px; /* Header height */
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* App Container */
+      .app-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .app-header {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .app-header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .app-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .app-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        position: relative;
+      }
+
+      .app-wrapper {
+        position: relative;
+        height: calc(100vh - 130px); /* Full viewport minus header and app header */
+        overflow: hidden;
+      }
+
+      .app-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .app-toolbar {
+        background: #f5f7fa;
+        border-top: 1px solid #eaeef3;
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .toolbar-left, .toolbar-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .tips-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: white;
+        border: none;
+        border-radius: 100px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--primary);
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .tips-toggle:hover {
+        background: var(--accent-light);
+      }
+
+      .tips-toggle i {
+        transition: transform 0.3s ease;
+      }
+
+      .tips-toggle.active i {
+        transform: rotate(180deg);
+      }
+
+      .tips-panel {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 20px;
+        width: calc(100% - 40px);
+        z-index: 10;
+        padding: 1.5rem;
+        display: none;
+        animation: slideUp 0.3s ease forwards;
+      }
+
+      .tips-panel.show {
+        display: block;
+      }
+
+      .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .tip-card {
+        background: var(--bg-alt);
+        border-radius: 8px;
+        padding: 1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .tip-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .tip-card i {
+        color: var(--primary);
+        font-size: 1.2rem;
+        padding-top: 0.2rem;
+      }
+
+      .tip-card div h4 {
+        margin-bottom: 0.3rem;
+        font-size: 1rem;
+      }
+
+      .tip-card div p {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+
+      /* Info Panel */
+      .info-panel {
+        background: white;
+        position: fixed;
+        top: 70px;
+        right: -400px;
+        width: 380px;
+        height: calc(100vh - 70px);
+        z-index: 900;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+      }
+
+      .info-panel.open {
+        right: 0;
+      }
+
+      .info-header {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        color: white;
+        padding: 1.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+
+      .info-header h3 {
+        margin-bottom: 0.5rem;
+      }
+
+      .info-header p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      .info-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .info-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .info-content {
+        padding: 1.5rem;
+        flex: 1;
+      }
+
+      .feature-list {
+        margin: 1.5rem 0;
+      }
+
+      .feature-item {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .feature-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .feature-icon {
+        background: var(--accent-light);
+        color: var(--primary);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+
+      .feature-text h4 {
+        margin-bottom: 0.3rem;
+        color: var(--primary);
+      }
+
+      .feature-text p {
+        font-size: 0.9rem;
+        color: var(--text-light);
+      }
+
+      .cta-card {
+        background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+        border-radius: 12px;
+        padding: 1.5rem;
+        color: white;
+        margin-top: 1.5rem;
+      }
+
+      .cta-card h4 {
+        margin-bottom: 0.5rem;
+      }
+
+      .cta-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        opacity: 0.9;
+      }
+
+      /* Dark Mode Toggle */
+      .theme-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--primary);
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        transition: all 0.3s ease;
+      }
+
+      .theme-toggle:hover {
+        transform: rotate(30deg);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--primary-dark);
+        color: white;
+        padding: 0.75rem 0;
+        text-align: center;
+        font-size: 0.85rem;
+      }
+
+      .footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      /* Loader */
+      .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+
+      .loader-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .loader-spinner {
+        border: 4px solid rgba(0, 133, 162, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid var(--primary);
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .loader-text {
+        color: var(--primary);
+        font-weight: 600;
+        text-align: center;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 992px) {
+        .nav-menu {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          height: calc(100vh - 70px);
+          width: 100%;
+          padding: 2rem;
+          background: white;
+          flex-direction: column;
+          align-items: flex-start;
+          z-index: 990;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          transition: left 0.3s ease;
+          overflow-y: auto;
+        }
+
+        .nav-menu.active {
+          left: 0;
+        }
+
+        .mobile-toggle {
+          display: block;
+        }
+
+        .app-wrapper {
+          height: calc(100vh - 150px);
+        }
+
+        .info-panel {
+          width: 100%;
+          right: -100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          padding: 1rem;
+        }
+
+        .app-header {
+          padding: 1rem;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .app-wrapper {
+          height: calc(100vh - 180px);
+        }
+
+        .app-toolbar {
+          padding: 0.75rem 1rem;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .toolbar-left, .toolbar-right {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .tips-panel {
+          left: 10px;
+          width: calc(100% - 20px);
+        }
+      }
+
+      /* Dark Mode Styles */
+      body.dark-mode {
+        --bg: #121212;
+        --bg-alt: #1e1e1e;
+        --text: #f0f0f0;
+        --text-light: #b0b0b0;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      body.dark-mode .header-transparent {
+        background: rgba(18, 18, 18, 0.85);
+      }
+
+      body.dark-mode .logo-text {
+        color: var(--text);
+      }
+
+      body.dark-mode .nav-link {
+        color: var(--text);
+      }
+
+      body.dark-mode .app-toolbar {
+        background: #1a1a1a;
+        border-top-color: #333;
+      }
+
+      body.dark-mode .tip-card {
+        background: #252525;
+      }
+
+      body.dark-mode .tips-toggle {
+        background: #252525;
+      }
+
+      body.dark-mode .info-panel {
+        background: var(--bg);
+      }
+
+      body.dark-mode .theme-toggle {
+        background: #252525;
+        color: var(--accent);
+      }
+
+      body.dark-mode .loader-overlay {
+        background: rgba(18, 18, 18, 0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="loader-overlay" id="loader">
+      <div class="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading Census Portal...</div>
+      </div>
+    </div>
+
+    <header class="header">
+      <nav class="container" aria-label="Main Navigation">
+        <h1><span>Alt-30</span> Consulting Group</h1>
+        <div class="mobile-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul id="navMenu">
+          <li><a href="alt-30.html">Home</a></li>
+          <li><a href="Our-Process.html">Our Process</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="blog.html">Our Blog</a></li>
+          <li><a href="Data-Portal.html">Data Portal</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- App Section -->
+      <section class="app-section animate-fadeIn">
+        <!-- App Header -->
+        <div class="app-header">
+          <h1><i class="fas fa-chart-bar"></i> Census Data Portal</h1>
+          
+          <div class="app-controls">
+            <button id="infoToggle" class="btn btn-sm btn-accent">
+              <i class="fas fa-info-circle"></i> About This Tool
+            </button>
+            <a href="alt-30.html#contact" class="btn btn-sm btn-outline">
+              <i class="fas fa-headset"></i> Support
+            </a>
+          </div>
+        </div>
+        
+        <!-- App Container -->
+        <div class="app-container">
+          <div class="app-wrapper">
+            <iframe 
+              src="https://alt30.shinyapps.io/Census_Portal/" 
+              title="Alt-30 Census Portal" 
+              allowfullscreen
+              id="censusPortal"
+            ></iframe>
+          </div>
+          
+          <!-- App Toolbar -->
+          <div class="app-toolbar">
+            <div class="toolbar-left">
+              <button id="tipsToggle" class="tips-toggle">
+                <i class="fas fa-lightbulb"></i> Quick Tips
+              </button>
+              
+              <!-- Tips Panel -->
+              <div class="tips-panel" id="tipsPanel">
+                <h3>Getting the Most from the Census Portal</h3>
+                <p>Our interactive tool helps you explore census data efficiently. Here are some helpful tips:</p>
+                
+                <div class="tips-grid">
+                  <div class="tip-card">
+                    <i class="fas fa-filter"></i>
+                    <div>
+                      <h4>Filter Data</h4>
+                      <p>Use left panel filters to narrow down specific demographics and regions.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="tip-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                      <h4>Switch Views</h4>
+                      <p>Toggle between different visualization types using the tabs at the top.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="tip-card">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <div>
+                      <h4>Interactive Elements</h4>
+                      <p>Hover over charts and maps for detailed tooltips with exact values.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="tip-card">
+                    <i class="fas fa-download"></i>
+                    <div>
+                      <h4>Export Data</h4>
+                      <p>Download reports and visualizations for presentations or deeper analysis.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="toolbar-right">
+              <a href="alt-30.html" class="btn btn-sm">
+                <i class="fas fa-home"></i> Back to Home
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Info Panel -->
+    <aside class="info-panel" id="infoPanel">
+      <div class="info-header">
+        <button class="info-close" id="infoClose">
+          <i class="fas fa-times"></i>
+        </button>
+        <h3>About the Census Portal</h3>
+        <p>A powerful tool for exploring and analyzing comprehensive census data.</p>
+      </div>
+      
+      <div class="info-content">
+        <p>The Alt-30 Census Portal provides access to detailed demographic, economic, and social data from the latest census. Our interactive platform makes it easy to explore trends, compare regions, and extract meaningful insights.</p>
+        
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Interactive Visualizations</h4>
+              <p>Explore data through intuitive charts, maps, and graphs that respond to your inputs in real-time.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-filter"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Advanced Filtering</h4>
+              <p>Narrow down data by demographics, geographic locations, time periods, and specific metrics to find exactly what you need.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Geographic Mapping</h4>
+              <p>Visualize data across different regions with color-coded maps that highlight patterns and trends.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-download"></i>
+            </div>
+            <div class="feature-text">
+              <h4>Export Capabilities</h4>
+              <p>Download your findings as reports, images, or raw data for use in your own analyses and presentations.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cta-card">
+          <h4>Need Custom Analysis?</h4>
+          <p>Our team can help you dive deeper into the data with customized dashboards and expert analysis tailored to your specific needs.</p>
+          <a href="alt-30.html#contact" class="btn btn-accent btn-sm">Get in Touch</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <footer class="footer">
+      <p>&copy; 2024 Alt-30 Consulting Group. All rights reserved. | <a href="alt-30.html#contact">Contact Us</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Elements
+        const loader = document.getElementById('loader');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const tipsToggle = document.getElementById('tipsToggle');
+        const tipsPanel = document.getElementById('tipsPanel');
+        const infoToggle = document.getElementById('infoToggle');
+        const infoPanel = document.getElementById('infoPanel');
+        const infoClose = document.getElementById('infoClose');
+        const themeToggle = document.getElementById('themeToggle');
+        const portalFrame = document.getElementById('censusPortal');
+        
+        // Loader
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            loader.classList.add('hidden');
+          }, 800);
+        });
+        
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          menuToggle.innerHTML = navMenu.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll("nav ul li a");
+        navLinks.forEach(link => {
+          link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+          });
+        });
+        
+        // Tips panel toggle
+        tipsToggle.addEventListener('click', function() {
+          tipsPanel.classList.toggle('show');
+          tipsToggle.classList.toggle('active');
+          
+          // Close info panel if open
+          infoPanel.classList.remove('open');
+        });
+        
+        // Close tips panel when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!tipsPanel.contains(event.target) && !tipsToggle.contains(event.target)) {
+            tipsPanel.classList.remove('show');
+            tipsToggle.classList.remove('active');
+          }
+        });
+        
+        // Info panel toggle
+        infoToggle.addEventListener('click', function() {
+          infoPanel.classList.toggle('open');
+          
+          // Close tips panel if open
+          tipsPanel.classList.remove('show');
+          tipsToggle.classList.remove('active');
+        });
+        
+        // Info panel close button
+        infoClose.addEventListener('click', function() {
+          infoPanel.classList.remove('open');
+        });
+        
+        // Dark mode toggle
+        themeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark-mode');
+          
+          if (document.body.classList.contains('dark-mode')) {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+          } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+          }
+        });
+        
+        // Header scroll effect - removed to match main site styling
+        window.addEventListener('scroll', function() {
+          // No scroll effect as the header is always solid colored
+        });
+        
+        // Initialize scroll check
+        window.dispatchEvent(new Event('scroll'));
+        
+        // Handle iframe loading events
+        portalFrame.addEventListener('load', function() {
+          console.log('Census Portal has loaded successfully');
+        });
+        
+        // Add animation delays to stagger elements
+        const animatedElements = document.querySelectorAll('.animate-slideUp');
+        animatedElements.forEach((el, index) => {
+          el.style.animationDelay = (0.1 + (index * 0.1)) + 's';
+        });
+      });
+    </script>
+  </body>
+</html>

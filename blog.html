@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alt-30 Consulting - Blog</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0085a2;
+        --secondary: #00b7a8;
+        --accent: #ffe194;
+        --text: #2f2f2f;
+        --bg: #ffffff;
+        --light-gray: #f5f5f5;
+        --border: #e0e0e0;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        font-family: "Poppins", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        scroll-behavior: smooth;
+        line-height: 1.6;
+      }
+      /* Header / Navigation */
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      nav.container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        width: 90%;
+        max-width: 1400px;
+        margin: auto;
+      }
+      nav h1 {
+        font-size: 1.5rem;
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+      }
+      nav h1 span {
+        color: var(--accent);
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.5rem;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        font-weight: 500;
+        transition: transform 0.2s, color 0.2s;
+      }
+      nav a:hover,
+      nav a:focus {
+        transform: scale(1.05);
+        color: var(--accent);
+      }
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: 0.3s;
+      }
+      nav a:hover::after,
+      nav a:focus::after {
+        width: 100%;
+      }
+
+      /* Blog Header */
+      .blog-header {
+        background: linear-gradient(rgba(0, 133, 162, 0.9), rgba(0, 183, 168, 0.9)),
+                    url('/api/placeholder/1400/400') center/cover;
+        padding: 6rem 2rem;
+        text-align: center;
+        color: white;
+        margin-top: 60px;
+      }
+      .blog-header h2 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        font-family: "Playfair Display", serif;
+      }
+      .blog-header p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Main Content */
+      main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* Featured Post */
+      .featured-post {
+        margin-bottom: 4rem;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .featured-post-content {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 2rem;
+      }
+      .featured-post img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .featured-post-text {
+        padding: 2rem;
+      }
+      .featured-label {
+        background: var(--accent);
+        color: var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      .featured-post h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-family: "Playfair Display", serif;
+        color: var(--primary);
+      }
+
+      /* Posts Grid */
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      .post-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .post-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .post-card-content {
+        padding: 1.5rem;
+      }
+      .post-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        font-family: "Playfair Display", serif;
+      }
+      .post-card p {
+        color: var(--text);
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+      }
+      .post-card a {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+      .post-card a:hover {
+        background-color: var(--secondary);
+      }
+
+      /* Loading and Error States */
+      .loading, .error {
+        text-align: center;
+        padding: 4rem 2rem;
+      }
+      .loading {
+        color: var(--primary);
+        font-size: 1.2rem;
+      }
+      .error {
+        color: #dc3545;
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #fff;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 4rem;
+      }
+      footer p {
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .featured-post-content {
+          grid-template-columns: 1fr;
+        }
+        .featured-post img {
+          height: 300px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav.container {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        nav ul {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .blog-header h2 {
+          font-size: 2rem;
+        }
+        .featured-post h3 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header / Navigation -->
+    <header>
+      <nav class="container" aria-label="Main Navigation">
+        <h1><span>Alt-30</span> Consulting Group</h1>
+        <ul>
+          <li><a href="alt-30.html">Home</a></li>
+          <li><a href="Our-Process.html">Our Process</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="blog.html">Our Blog</a></li>
+          <li><a href="Data-Portal.html">Data Portal</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+      <h2>Insights & Analysis</h2>
+      <p>Expert perspectives on economics, policy, and market trends</p>
+    </section>
+    
+    <!-- Main Content -->
+    <main>
+      <!-- Featured Post -->
+      <div id="featuredPost" class="featured-post">
+        <!-- Featured post will be injected here -->
+      </div>
+
+      <!-- Regular Posts Grid -->
+      <div id="postsGrid" class="posts-grid">
+        <div class="loading">Loading blog posts...</div>
+      </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Alt-30 Consulting Group. All rights reserved.</p>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+      async function loadBlogPosts() {
+        const targetUrl = 'https://alt30.substack.com/feed';
+        const corsProxies = [
+          'https://api.allorigins.win/get?url=',
+          'https://corsproxy.io/?',
+          'https://proxy.cors.sh/',
+          'https://cors-anywhere.herokuapp.com/'
+        ];
+        
+        const featuredPostDiv = document.getElementById('featuredPost');
+        const postsGridDiv = document.getElementById('postsGrid');
+        
+        for (const proxy of corsProxies) {
+          try {
+            const response = await fetch(proxy + encodeURIComponent(targetUrl));
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            
+            let xmlText;
+            if (proxy.includes('allorigins')) {
+              const json = await response.json();
+              xmlText = json.contents;
+            } else {
+              xmlText = await response.text();
+            }
+            
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(xmlText, 'text/xml');
+            
+            if (xml.getElementsByTagName('parsererror').length > 0) {
+              throw new Error('XML parsing error');
+            }
+            
+            const items = xml.getElementsByTagName('item');
+            if (items.length === 0) {
+              postsGridDiv.innerHTML = '<div class="error">No blog posts found.</div>';
+              return;
+            }
+            
+            // Process featured post (first post)
+            const featuredItem = items[0];
+            const featuredTitle = featuredItem.getElementsByTagName('title')[0]?.textContent || 'Untitled';
+            const featuredLink = featuredItem.getElementsByTagName('link')[0]?.textContent || '#';
+            let featuredContent = '';
+            
+            const featuredContentEl = featuredItem.getElementsByTagName('content:encoded')[0];
+            const featuredDescriptionEl = featuredItem.getElementsByTagName('description')[0];
+            
+            if (featuredContentEl && featuredContentEl.textContent.trim()) {
+              featuredContent = featuredContentEl.textContent;
+            } else if (featuredDescriptionEl && featuredDescriptionEl.textContent.trim()) {
+              featuredContent = featuredDescriptionEl.textContent;
+            }
+            
+            // Extract featured image
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = featuredContent;
+            const featuredImg = tempDiv.querySelector('img');
+            const featuredImgSrc = featuredImg ? featuredImg.src : '/api/placeholder/800/600';
+            
+            // Clean and truncate featured text
+            const featuredText = tempDiv.textContent.trim();
+            const featuredSnippet = featuredText.substring(0, 300) + (featuredText.length > 300 ? '...' : '');
+            
+            // Create featured post HTML
+            featuredPostDiv.innerHTML = `
+              <div class="featured-post-content">
+                <img src="${featuredImgSrc}" alt="${featuredTitle}">
+                <div class="featured-post-text">
+                  <span class="featured-label">Featured Post</span>
+                  <h3>${featuredTitle}</h3>
+                  <p>${featuredSnippet}</p>
+                  <a href="${featuredLink}" target="_blank" rel="noopener noreferrer">Read more</a>
+                </div>
+              </div>
+            `;
+            
+            // Process remaining posts
+            let postsHTML = '';
+            for (let i = 1; i < Math.min(items.length, 9); i++) {
+              const item = items[i];
+              const title = item.getElementsByTagName('title')[0]?.textContent || 'Untitled';
+              const link = item.getElementsByTagName('link')[0]?.textContent || '#';
+              let content = '';
+              
+              const contentEl = item.getElementsByTagName('content:encoded')[0];
+              const descriptionEl = item.getElementsByTagName('description')[0];
+              
+              if (contentEl && contentEl.textContent.trim()) {
+                content = contentEl.textContent;
+              } else if (descriptionEl && descriptionEl.textContent.trim()) {
+                content = descriptionEl.textContent;
+              }
+              
+              // Extract image and create snippet
+              const postDiv = document.createElement('div');
+              postDiv.innerHTML = content;
+              const img = postDiv.querySelector('img');
+              const imgSrc = img ? img.src : '/api/placeholder/400/300';
+              
+              const textContent = postDiv.textContent.trim();
+              const snippet = textContent.substring(0, 150) + (textContent.length > 150 ? '...' : '');
+              
+              postsHTML += `
+                <article class="post-card">
+                  <img src="${imgSrc}" alt="${title}">
+                  <div class="post-card-content">
+                    <h3>${title}</h3>
+                    <p>${snippet}</p>
+                    <a href="${link}" target="_blank" rel="noopener noreferrer">Read more</a>
+                  </div>
+                </article>
+              `;
+            }
+            
+            postsGridDiv.innerHTML = postsHTML;
+            return; // Success! Exit the function
+            
+          } catch (error) {
+            console.error(`Error with proxy ${proxy}:`, error);
+            // Continue to next proxy if this one failed
+            continue;
+          }
+        }
+        
+        // If we get here, all proxies failed
+        postsGridDiv.innerHTML = `
+          <div class="error">
+            Unable to load blog posts at this time. Please try again later.
+          </div>
+        `;
+      }
+      
+      document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
+  </body>
+</html>

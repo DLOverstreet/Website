@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alt-30 Consulting - Our Process</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Enhanced color palette - matching main page */
+        --primary: #0085a2; /* Vibrant teal-blue */
+        --primary-dark: #006d86; /* Darker shade for depth */
+        --secondary: #00b7a8; /* Lighter teal-green */
+        --secondary-light: #7fe0d6; /* Ultra light teal for accents */
+        --accent: #ffe194; /* Soft golden accent */
+        --accent-light: #fff1cc; /* Lighter accent for subtle highlights */
+        --text: #2f2f2f;
+        --text-light: #6f6f6f;
+        --bg: #ffffff;
+        --bg-alt: #f8fbfd;
+        --fade-duration: 0.8s;
+        --fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html, body {
+        font-family: "Poppins", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        scroll-behavior: smooth;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Typography Enhancements */
+      h1, h2, h3, h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+      
+      p {
+        font-size: 1.05rem;
+        color: var(--text);
+      }
+
+      /* Animations */
+      @keyframes fadeUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .fade-up {
+        animation: fadeUp var(--fade-duration) var(--fade-ease) forwards;
+        opacity: 0;
+      }
+      
+      .fade-in {
+        animation: fadeIn var(--fade-duration) var(--fade-ease) forwards;
+        opacity: 0;
+      }
+      
+      .float {
+        animation: float 5s ease-in-out infinite;
+      }
+      
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+      
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+      
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+
+      /* Header / Navigation */
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      nav.container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+      }
+      
+      nav h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      
+      nav h1 span {
+        color: var(--accent);
+      }
+      
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1.5rem;
+      }
+      
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        font-weight: 500;
+        transition: transform 0.2s, color 0.2s;
+      }
+      
+      nav a:hover, nav a:focus {
+        transform: scale(1.05);
+        color: var(--accent);
+      }
+      
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: 0.3s;
+      }
+      
+      nav a:hover::after, nav a:focus::after {
+        width: 100%;
+      }
+      
+      /* Mobile Navigation */
+      .mobile-toggle {
+        display: none;
+        font-size: 1.5rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Back to Top Button */
+      #backToTop {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--accent);
+        color: var(--primary);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        z-index: 99;
+      }
+      
+      #backToTop:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Button Styles */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: var(--accent);
+        color: var(--primary);
+        border-radius: 50px;
+        text-decoration: none;
+        transition: 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        margin: 0.5rem;
+      }
+      
+      .btn:hover, .btn:focus {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+      
+      .btn-outline {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+      }
+      
+      .btn-outline:hover {
+        background: white;
+        color: var(--primary);
+      }
+      
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+      
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+      
+      .btn-lg {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
+
+      /* Section Defaults */
+      section {
+        padding: 5rem 0;
+        overflow: hidden;
+        position: relative;
+      }
+      
+      .pt-0 {
+        padding-top: 0;
+      }
+      
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+      }
+      
+      .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+      
+      .section-header h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        display: inline-block;
+        position: relative;
+      }
+      
+      .section-header h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--accent);
+      }
+      
+      .section-header p {
+        max-width: 800px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+        color: var(--text-light);
+        margin-top: 1.5rem;
+      }
+
+      /* Hero Section - Process Page */
+      #process-hero {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(0, 133, 162, 0.9), rgba(0, 183, 168, 0.9)),
+                  url("https://source.unsplash.com/random/1920x1080/?data,technology") center/cover no-repeat;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        margin-top: 0;
+        padding: 0;
+      }
+      
+      .process-hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+      
+      .process-hero-content h1 {
+        font-size: 3.2rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+      
+      .process-hero-content p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      
+      .hero-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      
+      .hero-shape {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+      }
+      
+      .shape-1 {
+        width: 300px;
+        height: 300px;
+        top: -100px;
+        right: -100px;
+      }
+      
+      .shape-2 {
+        width: 200px;
+        height: 200px;
+        bottom: -50px;
+        left: -50px;
+      }
+      
+      .shape-3 {
+        width: 150px;
+        height: 150px;
+        top: 40%;
+        left: 15%;
+      }
+      
+      .hero-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Toggle Buttons */
+      .toggle-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 3rem;
+      }
+      
+      .toggle-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+      
+      .toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: var(--bg-alt);
+        color: var(--primary);
+        border-radius: 50px;
+        text-decoration: none;
+        transition: 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        min-width: 180px;
+      }
+      
+      .toggle-btn i {
+        font-size: 1.2rem;
+      }
+      
+      .toggle-btn:hover {
+        background: var(--secondary-light);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .toggle-btn.active {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Workflow Phases */
+      .phase {
+        margin-bottom: 4rem;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      
+      .phase:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      }
+      
+      .phase-header {
+        margin-bottom: 2rem;
+        text-align: center;
+        position: relative;
+      }
+      
+      .phase-header h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        display: inline-block;
+        position: relative;
+      }
+      
+      .phase-header h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 2px;
+        background: var(--accent);
+      }
+      
+      .phase-description {
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        text-align: center;
+        color: var(--text-light);
+        font-size: 1.1rem;
+      }
+      
+      .cards-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        align-items: stretch;
+      }
+
+      .cards-row .arrow-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 1.5rem;
+      }
+      
+      .card {
+        background: var(--bg-alt);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: 0.3s;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        flex: 1;
+        min-width: 250px;
+        max-width: 500px;
+      }
+      
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      
+      .card .icon-circle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 1rem;
+        color: white;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+      
+      .card h4 {
+        font-size: 1.3rem;
+        color: var(--primary);
+        margin: 0;
+      }
+      
+      .card ol {
+        margin: 0.75rem 0 0 1.25rem;
+        line-height: 1.6;
+      }
+      
+      .card ol li {
+        margin-bottom: 0.75rem;
+        color: var(--text);
+      }
+      
+      /* Single wide card */
+      .card-wide {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      /* Impact Section */
+      #impactSection {
+        background: var(--bg-alt);
+        padding: 5rem 0;
+        margin-top: 2rem;
+      }
+      
+      .impact-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      
+      .impact-header h3 {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+      
+      .impact-header p {
+        max-width: 700px;
+        margin: 0 auto;
+        color: var(--text-light);
+      }
+      
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .impact-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        transition: 0.3s;
+        height: 100%;
+      }
+      
+      .impact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      }
+      
+      .impact-icon {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 2.5rem;
+        display: block;
+        text-align: center;
+      }
+      
+      .impact-card h4 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        text-align: center;
+      }
+      
+      .impact-card p {
+        line-height: 1.6;
+        color: var(--text-light);
+        text-align: center;
+      }
+
+      /* CTA Section */
+      #cta {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        text-align: center;
+        padding: 4rem 0;
+      }
+      
+      #cta h3 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: white;
+      }
+      
+      #cta p {
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+        color: white;
+        padding: 4rem 0 1.5rem;
+      }
+      
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+      
+      .footer-column h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        color: white;
+      }
+      
+      .footer-column p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 1rem;
+      }
+      
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.8rem;
+        transition: color 0.3s;
+      }
+      
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border-radius: 50%;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+      
+      .social-links a:hover {
+        background: white;
+        color: var(--primary);
+        transform: translateY(-3px);
+      }
+      
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Responsive Media Queries */
+      @media (max-width: 992px) {
+        .process-hero-content h1 {
+          font-size: 2.5rem;
+        }
+        
+        .cards-row {
+          flex-direction: column;
+        }
+        
+        .cards-row .arrow-center {
+          transform: rotate(90deg);
+          margin: 1rem 0;
+        }
+      }
+      
+      @media (max-width: 850px) {
+        nav ul {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          height: calc(100vh - 70px);
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          padding-top: 2rem;
+          transition: 0.3s ease-in-out;
+          z-index: 998;
+        }
+        
+        nav ul.active {
+          left: 0;
+        }
+        
+        nav ul li {
+          margin: 1rem 0;
+        }
+        
+        .mobile-toggle {
+          display: block;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .process-hero-content h1 {
+          font-size: 2rem;
+        }
+        
+        .process-hero-content p {
+          font-size: 1.1rem;
+        }
+        
+        .section-header h2,
+        #cta h3 {
+          font-size: 1.8rem;
+        }
+        
+        .toggle-buttons {
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        
+        .impact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .btn {
+          display: block;
+          width: 100%;
+          margin: 0.5rem 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header / Navigation -->
+    <header>
+      <nav class="container" aria-label="Main Navigation">
+        <h1><span>Alt-30</span> Consulting Group</h1>
+        <div class="mobile-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul id="navMenu">
+          <li><a href="alt-30.html">Home</a></li>
+          <li><a href="Our-Process.html">Our Process</a></li>
+          <li><a href="templates.html">Templates</a></li>
+          <li><a href="blog.html">Our Blog</a></li>
+          <li><a href="Data-Portal.html">Data Portal</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="process-hero">
+      <div class="hero-shapes">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        <div class="hero-shape shape-3"></div>
+      </div>
+      <div class="process-hero-content">
+        <div class="hero-badge fade-up">Our Proven Approach</div>
+        <h1 class="fade-up">Data Integration &amp; Analysis Platform</h1>
+        <p class="fade-up delay-1">
+          Discover our step-by-step approach to unifying data sources, conducting
+          powerful analytics, and delivering real-time insights—whether you're a
+          government agency or a growing business.
+        </p>
+        <div class="hero-actions fade-up delay-2">
+          <a href="#contact" class="btn btn-lg">Get Started</a>
+          <a href="#workflow" class="btn btn-outline btn-lg">Explore Our Process</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Sector Toggles Section -->
+      <section id="sector-toggle">
+        <div class="container">
+          <div class="section-header fade-up">
+            <h2>Tailored Solutions for Your Sector</h2>
+            <p>
+              Whether you're a government agency seeking efficient service delivery
+              or a business aiming to maximize market potential, we tailor our
+              platform to meet your unique challenges. Toggle below to explore the
+              difference.
+            </p>
+          </div>
+          <div class="toggle-container fade-up delay-1">
+            <div class="toggle-buttons">
+              <button
+                id="governmentToggle"
+                class="toggle-btn active"
+                aria-label="Government Sector"
+              >
+                <i class="fas fa-landmark"></i>
+                <span>Government</span>
+              </button>
+              <button
+                id="businessToggle"
+                class="toggle-btn"
+                aria-label="Business Sector"
+              >
+                <i class="fas fa-briefcase"></i>
+                <span>Business</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Workflow Section -->
+      <section id="workflow">
+        <div class="container">
+          <!-- Phase 1: Data Collection -->
+          <div class="phase fade-up">
+            <div class="phase-header">
+              <h3>Phase 1: Data Collection</h3>
+              <div class="phase-description">
+                <p>
+                  We begin by gathering both public and proprietary data to create a
+                  holistic foundation for analysis. This stage ensures completeness,
+                  accuracy, and compliance.
+                </p>
+              </div>
+            </div>
+            <div class="cards-row">
+              <!-- Card 1: Public Data Sources -->
+              <div class="card fade-up delay-1" id="publicDataSources" aria-label="Public Data Sources">
+                <div class="card-header">
+                  <div class="icon-circle">
+                    <i class="fas fa-globe"></i>
+                  </div>
+                  <h4 id="publicDataSourcesTitle">Public Data Sources</h4>
+                </div>
+                <ol id="publicDataSourcesList">
+                  <li>Federal &amp; State Data</li>
+                  <li>Real-time Updates</li>
+                </ol>
+              </div>
+
+              <div class="arrow-center">
+                <i class="fas fa-arrow-right"></i>
+              </div>
+
+              <!-- Card 2: Private Data Integration -->
+              <div class="card fade-up delay-2" id="privateDataIntegration" aria-label="Private Data Integration">
+                <div class="card-header">
+                  <div class="icon-circle" style="background: var(--secondary);">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                  <h4 id="privateDataIntegrationTitle">Private Data Integration</h4>
+                </div>
+                <ol id="privateDataIntegrationList">
+                  <li>Department Systems</li>
+                  <li>Secure Compliance</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 2: Analysis -->
+          <div class="phase fade-up">
+            <div class="phase-header">
+              <h3>Phase 2: Analysis</h3>
+              <div class="phase-description">
+                <p>
+                  Our advanced analytics engine processes collected data, while an
+                  intuitive visualization studio helps stakeholders translate insights
+                  into effective strategies.
+                </p>
+              </div>
+            </div>
+            <div class="cards-row">
+              <!-- Card 1: Analysis Engine -->
+              <div class="card fade-up delay-1" id="analysisEngine" aria-label="Analysis Engine">
+                <div class="card-header">
+                  <div class="icon-circle" style="background: var(--secondary);">
+                    <i class="fas fa-microchip"></i>
+                  </div>
+                  <h4 id="analysisEngineTitle">Analysis Engine</h4>
+                </div>
+                <ol id="analysisEngineList">
+                  <li>Policy Analysis</li>
+                  <li>Program Evaluation</li>
+                </ol>
+              </div>
+
+              <div class="arrow-center">
+                <i class="fas fa-arrow-right"></i>
+              </div>
+
+              <!-- Card 2: Visualization Studio -->
+              <div class="card fade-up delay-2" id="visualizationStudio" aria-label="Visualization Studio">
+                <div class="card-header">
+                  <div class="icon-circle">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <h4 id="visualizationStudioTitle">Visualization Studio</h4>
+                </div>
+                <ol id="visualizationStudioList">
+                  <li>Program Dashboards</li>
+                  <li>Public Reports</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 3: Intelligence Hub -->
+          <div class="phase fade-up">
+            <div class="phase-header">
+              <h3>Phase 3: Intelligence Hub</h3>
+              <div class="phase-description">
+                <p>
+                  Consolidate your data insights into a centralized command center.
+                  Leverage strategic recommendations and real-time performance metrics
+                  for timely, data-driven decisions.
+                </p>
+              </div>
+            </div>
+            <div class="cards-row">
+              <div
+                class="card card-wide fade-up delay-1"
+                id="intelligenceHub"
+                aria-label="Intelligence Hub"
+              >
+                <div class="card-header">
+                  <div class="icon-circle" style="background: var(--primary);">
+                    <i class="fas fa-bullseye"></i>
+                  </div>
+                  <h4 id="intelligenceHubTitle">Intelligence Hub</h4>
+                </div>
+                <ol id="intelligenceHubList">
+                  <li>Service Optimization</li>
+                  <li>Resource Planning</li>
+                  <li>Public Engagement</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Impact Section -->
+      <section id="impactSection">
+        <div class="container">
+          <div class="impact-header fade-up">
+            <h3 id="impactSectionHeading">Impact: Government</h3>
+            <p>
+              Our solutions drive transformative outcomes. We empower agencies and
+              businesses to innovate, respond, and outperform.
+            </p>
+          </div>
+          <div class="impact-grid">
+            <div class="impact-card fade-up delay-1" id="impactCard1" aria-label="Impact Card 1">
+              <div class="impact-icon">
+                <i class="fas fa-thumbs-up"></i>
+              </div>
+              <h4 id="impactTitle1">Public Trust & Transparency</h4>
+              <p id="impactDesc1">
+                Elevate trust through transparent data sharing and policies.
+              </p>
+            </div>
+            <div class="impact-card fade-up delay-2" id="impactCard2" aria-label="Impact Card 2">
+              <div class="impact-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h4 id="impactTitle2">Policy Efficiency & Outcomes</h4>
+              <p id="impactDesc2">
+                Adapt swiftly to real-world data and continuously improve programs.
+              </p>
+            </div>
+            <div class="impact-card fade-up delay-3" id="impactCard3" aria-label="Impact Card 3">
+              <div class="impact-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h4 id="impactTitle3">Enhanced Accountability</h4>
+              <p id="impactDesc3">
+                Maintain compliance with measurable success metrics across agencies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section id="cta">
+        <div class="container">
+          <h3 class="fade-up">Ready to accelerate your data-driven transformation?</h3>
+          <p class="fade-up delay-1">
+            Let's discuss how our tailored data solutions can help your organization achieve its goals and maximize its potential.
+          </p>
+          <div class="fade-up delay-2">
+            <a href="alt-30.html#contact" class="btn">Contact Us Today</a>
+            <a href="templates.html" class="btn btn-outline">View Our Templates</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Alt-30 Consulting Group</h3>
+            <p>Your partner for data-driven business transformation and financial excellence.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+              <a href="alt-30.html">Home</a>
+              <a href="Our-Process.html">Our Process</a>
+              <a href="templates.html">Templates</a>
+              <a href="blog.html">Our Blog</a>
+              <a href="Data-Portal.html">Data Portal</a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i></p>
+            <p><i class="fas fa-phone"></i></p>
+            <p><i class="fas fa-map-marker-alt"></i> Mesa, AZ</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Alt-30 Consulting Group. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" aria-label="Back to Top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (menuToggle && navMenu) {
+          menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            menuToggle.innerHTML = navMenu.classList.contains('active') 
+              ? '<i class="fas fa-times"></i>' 
+              : '<i class="fas fa-bars"></i>';
+          });
+        }
+        
+        // Fade-in animations on scroll
+        const fadeElements = document.querySelectorAll('.fade-up, .fade-in');
+        
+        function checkFade() {
+          const triggerBottom = window.innerHeight * 0.85;
+          
+          fadeElements.forEach((el) => {
+            const elTop = el.getBoundingClientRect().top;
+            
+            if (elTop < triggerBottom) {
+              el.style.animationPlayState = 'running';
+            }
+          });
+        }
+        
+        // Set initial state for animations
+        fadeElements.forEach((el) => {
+          el.style.animationPlayState = 'paused';
+        });
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('resize', checkFade);
+        
+        // Trigger initial check
+        setTimeout(checkFade, 100);
+        
+        // Back to Top Button
+        const backToTop = document.getElementById("backToTop");
+        
+        if (backToTop) {
+          window.addEventListener("scroll", () => {
+            backToTop.style.display = window.scrollY > 300 ? "flex" : "none";
+          });
+          
+          backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+              targetElement.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+        
+        // Sector toggles
+        const governmentToggle = document.getElementById("governmentToggle");
+        const businessToggle = document.getElementById("businessToggle");
+        
+        // Phase 1 elements
+        const publicDataSourcesList = document.getElementById("publicDataSourcesList");
+        const privateDataIntegrationList = document.getElementById("privateDataIntegrationList");
+        
+        // Phase 2 elements
+        const analysisEngineList = document.getElementById("analysisEngineList");
+        const visualizationStudioList = document.getElementById("visualizationStudioList");
+        
+        // Phase 3 elements
+        const intelligenceHubList = document.getElementById("intelligenceHubList");
+        const intelligenceHubTitle = document.getElementById("intelligenceHubTitle");
+        
+        // Impact elements
+        const impactSectionHeading = document.querySelector("#impactSectionHeading");
+        const impactTitle1 = document.getElementById("impactTitle1");
+        const impactDesc1 = document.getElementById("impactDesc1");
+        const impactTitle2 = document.getElementById("impactTitle2");
+        const impactDesc2 = document.getElementById("impactDesc2");
+        const impactTitle3 = document.getElementById("impactTitle3");
+        const impactDesc3 = document.getElementById("impactDesc3");
+
+        function setActive(button) {
+          governmentToggle.classList.remove("active");
+          businessToggle.classList.remove("active");
+          button.classList.add("active");
+        }
+
+        function switchToGovernment() {
+          setActive(governmentToggle);
+          
+          // Phase 1
+          publicDataSourcesList.innerHTML = `
+            <li>National & State Databases</li>
+            <li>Real-time Statistical & Demographic Data</li>
+            <li>Regulatory Datasets & Compliance Monitoring</li>
+          `;
+          privateDataIntegrationList.innerHTML = `
+            <li>Department Systems & Legacy Infrastructure</li>
+            <li>Secure & Auditable Data Access</li>
+            <li>Cross-Agency Collaboration & Sharing</li>
+          `;
+          
+          // Phase 2
+          analysisEngineList.innerHTML = `
+            <li>Policy Impact Forecasting</li>
+            <li>Program & Budget Evaluations</li>
+            <li>Performance & Outcome Dashboards</li>
+          `;
+          visualizationStudioList.innerHTML = `
+            <li>Interdepartmental Dashboards</li>
+            <li>Public-Facing Reporting</li>
+            <li>Interactive Visual Summaries</li>
+          `;
+          
+          // Phase 3
+          intelligenceHubTitle.textContent = "Intelligence Hub";
+          intelligenceHubList.innerHTML = `
+            <li>Service Optimization Across Agencies</li>
+            <li>Evidence-Based Resource Planning</li>
+            <li>Citizen-Focused Engagement</li>
+          `;
+          
+          // Impact
+          impactSectionHeading.textContent = "Impact: Government";
+          impactTitle1.textContent = "Public Trust & Transparency";
+          impactDesc1.textContent = "Elevate trust through transparent data sharing and policies.";
+          impactTitle2.textContent = "Policy Efficiency & Outcomes";
+          impactDesc2.textContent = "Adapt swiftly to real-world data and continuously improve programs.";
+          impactTitle3.textContent = "Enhanced Accountability";
+          impactDesc3.textContent = "Maintain compliance with measurable success metrics across agencies.";
+        }
+
+        function switchToBusiness() {
+          setActive(businessToggle);
+          
+          // Phase 1
+          publicDataSourcesList.innerHTML = `
+            <li>Market & Industry Reports</li>
+            <li>Competitive Intelligence</li>
+            <li>Macroeconomic & Trend Data</li>
+          `;
+          privateDataIntegrationList.innerHTML = `
+            <li>ERP & CRM Systems</li>
+            <li>Proprietary Sales & Operations Data</li>
+            <li>Secure & Encrypted Data Storage</li>
+          `;
+          
+          // Phase 2
+          analysisEngineList.innerHTML = `
+            <li>Market Segmentation & Trend Forecasting</li>
+            <li>Performance Metrics & KPI Tracking</li>
+            <li>ROI Analysis & Predictive Modeling</li>
+          `;
+          visualizationStudioList.innerHTML = `
+            <li>Executive Dashboards & KPI Visualization</li>
+            <li>Stakeholder & Investor Reporting</li>
+            <li>Interactive Data Storytelling</li>
+          `;
+          
+          // Phase 3
+          intelligenceHubTitle.textContent = "Intelligence Hub";
+          intelligenceHubList.innerHTML = `
+            <li>Strategic Resource Allocation</li>
+            <li>Growth & Expansion Planning</li>
+            <li>Customer & Partner Engagement</li>
+          `;
+          
+          // Impact
+          impactSectionHeading.textContent = "Impact: Business";
+          impactTitle1.textContent = "Accelerated Market Growth";
+          impactDesc1.textContent = "Capitalize on data insights to discover new markets and revenue streams.";
+          impactTitle2.textContent = "Operational Excellence";
+          impactDesc2.textContent = "Refine processes, reduce overhead, and enhance product/service quality.";
+          impactTitle3.textContent = "Competitive Edge";
+          impactDesc3.textContent = "Leverage agile, data-driven strategies that adapt to evolving market demands.";
+        }
+
+        governmentToggle.addEventListener("click", switchToGovernment);
+        businessToggle.addEventListener("click", switchToBusiness);
+
+        // Initialize default to Government
+        switchToGovernment();
+      });
+    </script>
+  </body>
+</html>
